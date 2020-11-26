@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<link th:href = "@{/css/bootstrap.min.css}" rel="stylesheet">
+<body>
+
+	<div th:insert="~{navbar::navbar}"></div>
+	<h1>Carro</h1>
+								<div class = "container">
+									<div class = "row">
+										<div class = "col-md-4">
+	                                <table class ="table table-responsive table-bordered table-striped">
+	                                	<thead>
+	                                		<tr>
+	                                			<th class="col-md-1">Ação</th>
+	                                			<th class="col-md-6">Nome</th>
+	                                			<th class="col-md-6">Marca</th>
+	                                		</tr>
+	                                	</thead>
+	                                	<tbody>
+                                    		<tr th:each="car : ${lista}">                                 
+                                        		<td><a class="btn btn-primary">Update</a>
+                                        			<a class="btn btn-danger">Delete</a>
+                                        		</td>      
+                                        		<td th:text="${car.nome}">Nomes</td>
+                                        		<td th:text="${car.marca}">Marca</td>
+                                        		                               
+                                    		</tr>
+                                    	</tbody>
+                                	</table>
+                                		</div>
+                                	</div>
+								</div>
+
+</body>
+</html>
