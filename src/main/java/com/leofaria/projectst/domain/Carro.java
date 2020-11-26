@@ -1,17 +1,34 @@
-package com.leofaria.projectst.damain;
+package com.leofaria.projectst.domain;
 
 import java.io.Serializable;
 
-public class Vendedor implements Serializable{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Carro implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String Cpf;
+	private String marca;
+	
+	public Carro(Integer id, String nome, String marca) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.marca = marca;
+	}
+	
+	public Carro() {}
 	
 	public Integer getId() {
 		return id;
@@ -25,17 +42,19 @@ public class Vendedor implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCpf() {
-		return Cpf;
+	public String getMarca() {
+		return marca;
 	}
-	public void setCpf(String cpf) {
-		Cpf = cpf;
+	public void setMarca(String marca) {
+		this.marca = marca;
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Cpf == null) ? 0 : Cpf.hashCode());
+		result = prime * result + ((marca == null) ? 0 : marca.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -47,11 +66,11 @@ public class Vendedor implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Vendedor other = (Vendedor) obj;
-		if (Cpf == null) {
-			if (other.Cpf != null)
+		Carro other = (Carro) obj;
+		if (marca == null) {
+			if (other.marca != null)
 				return false;
-		} else if (!Cpf.equals(other.Cpf))
+		} else if (!marca.equals(other.marca))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -60,19 +79,19 @@ public class Vendedor implements Serializable{
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Vendedor [id=");
+		builder.append("Carro [id=");
 		builder.append(id);
 		builder.append(", nome=");
 		builder.append(nome);
-		builder.append(", Cpf=");
-		builder.append(Cpf);
+		builder.append(", marca=");
+		builder.append(marca);
 		builder.append("]");
 		return builder.toString();
 	}
 	
 	
-
 }
