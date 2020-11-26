@@ -25,7 +25,7 @@
 	                                	<tbody>
                                     		<tr th:each="car : ${lista}">                                 
                                         		<td><a class="btn btn-primary">Update</a>
-                                        			<a class="btn btn-danger">Delete</a>
+                                        			<a class="btn btn-danger" th:href = "@{../carros/delete/__${car.id}__}">Delete</a>
                                         		</td>      
                                         		<td th:text="${car.nome}">Nomes</td>
                                         		<td th:text="${car.marca}">Marca</td>

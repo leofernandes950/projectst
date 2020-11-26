@@ -45,10 +45,10 @@ public class CarroResource implements Serializable{
 		return "carro";
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id){
+	@RequestMapping(value = "/delete/{id}")
+	public String delete(@PathVariable Integer id){
 		service.delete(id);
-		return ResponseEntity.noContent().build();
+		return "redirect:/carros/lista";
 	}
 	
 	
