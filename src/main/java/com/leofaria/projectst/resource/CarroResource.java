@@ -21,7 +21,7 @@ public class CarroResource implements Serializable{
 
 
 	
-	@GetMapping("/carro")
+	@RequestMapping("/carro")
 	public String lstCarro(Model model) {
 		
 		List<Carro> lista = new ArrayList<>();
