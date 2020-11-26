@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.leofaria.projectst.domain.Carro;
+import com.leofaria.projectst.domain.Carro;
+import com.leofaria.projectst.dto.CarroDTO;
 import com.leofaria.projectst.services.exceptions.ObjectNotFoundException;
 import com.leofaria.projectst.repositories.CarroRepository;
 
@@ -20,7 +22,12 @@ public class CarroService {
 		Optional<Carro> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
-
+	
+	public Carro insert(Carro obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
+	
 	public List<Carro> findAll() {
 		return repo.findAll();
 	}
@@ -29,7 +36,21 @@ public class CarroService {
 		find(id);
 		repo.deleteById(id);
 	}
+	
+	public Carro update(Carro obj) {
+		Carro newObj = find(obj.getId());
+		updateData(newObj,obj);
+		return repo.save(newObj);
+	}
+	
+	private void updateData(Carro newObj,Carro obj) {
+		newObj.setNome(obj.getNome());	
+	}
 
-
+	public Carro fromDTO(CarroDTO objDto) {
+		return new Carro(objDto.getId(),objDto.getNome(),objDto.getMarca());
+	}
+	
+	
 
 }

@@ -1,18 +1,24 @@
 package com.leofaria.projectst.resource;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.leofaria.projectst.domain.Carro;
+import com.leofaria.projectst.dto.CarroDTO;
 import com.leofaria.projectst.domain.Carro;
 import com.leofaria.projectst.dto.CarroDTO;
 import com.leofaria.projectst.services.CarroService;
@@ -51,7 +57,23 @@ public class CarroResource implements Serializable{
 		return "redirect:/carros/lista";
 	}
 	
+	@RequestMapping(value="/novo" ,method= RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody CarroDTO objDto){
+		Carro obj = service.fromDTO(objDto);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
 	
+	
+	@RequestMapping(value="/update/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody CarroDTO objDto, @PathVariable Integer id){
+		Carro obj = service.fromDTO(objDto);
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
 
 	
 
