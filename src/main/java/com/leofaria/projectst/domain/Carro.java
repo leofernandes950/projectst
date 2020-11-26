@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Carro implements Serializable{
@@ -21,11 +23,25 @@ public class Carro implements Serializable{
 	private String nome;
 	private String marca;
 	
+	@ManyToOne
+	@JoinColumn(name="venda_id")
+	private Venda venda;
+	
+	//ao construir relacionamento venda 1 para carros * é necessário adiconar ao contrutor 
 	public Carro(Integer id, String nome, String marca) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.marca = marca;
+	}
+	
+	//ao construir relacionamento venda 1 para carros * é necessário criar um novo connstrutor
+	public Carro(Integer id, String nome, String marca, Venda venda) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.marca = marca;
+		this.venda = venda;
 	}
 	
 	public Carro() {}
@@ -49,7 +65,14 @@ public class Carro implements Serializable{
 		this.marca = marca;
 	}
 	
-	
+	public Venda getVenda() {
+		return venda;
+	}
+
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
