@@ -6,36 +6,50 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<link th:href = "@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 <body>
 
 	<div th:insert="~{navbar::navbar}"></div>
-	<h1>Carro</h1>
-								<div class = "container">
-									<div class = "row">
-										<div class = "col-md-4">
-	                                <table class ="table table-responsive table-bordered table-striped">
-	                                	<thead>
-	                                		<tr>
-	                                			<th class="col-md-1">Ação</th>
-	                                			<th class="col-md-6">Nome</th>
-	                                			<th class="col-md-6">Marca</th>
-	                                		</tr>
-	                                	</thead>
-	                                	<tbody>
-                                    		<tr th:each="car : ${lista}">                                 
-                                        		<td><a class="btn btn-primary">Update</a>
-                                        			<a class="btn btn-danger" th:href = "@{../carros/delete/__${car.id}__}">Delete</a>
-                                        		</td>      
-                                        		<td th:text="${car.nome}">Nomes</td>
-                                        		<td th:text="${car.marca}">Marca</td>
-                                        		                               
-                                    		</tr>
-                                    	</tbody>
-                                	</table>
-                                		</div>
-                                	</div>
-								</div>
+	<div class="container">
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h3 class="text-muted">Carros disponíveis</h3>
+			</section>
+			<div class =col-md-3>
+				<button class="btn btn-success">Novo Carro</button>
+			</div>
+			<br>
+			<section class="content">
+
+				<div class="row">
+					<div class="col-md-4">
+						<table class="table table-responsive table-bordered table-striped">
+							<thead>
+								<tr>
+									<th class="col-md-1">Ação</th>
+									<th class="col-md-1">Nome</th>
+									<th class="col-md-1">Marca</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="car : ${modelLista}">
+									<td><a class="btn btn-primary"
+										th:href="@{../carros/atualiza/__${car.id}__}">Update</a> <a
+										class="btn btn-danger"
+										th:href="@{../carros/delete/__${car.id}__}">Delete</a></td>
+									<td th:text="${car.nome}">Nomes</td>
+									<td th:text="${car.marca}">Marca</td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</section>
+		</div>
+	</div>
 
 </body>
 </html>

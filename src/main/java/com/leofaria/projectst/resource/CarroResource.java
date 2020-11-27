@@ -8,17 +8,19 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.leofaria.projectst.domain.Carro;
-import com.leofaria.projectst.dto.CarroDTO;
 import com.leofaria.projectst.domain.Carro;
 import com.leofaria.projectst.dto.CarroDTO;
 import com.leofaria.projectst.services.CarroService;
@@ -47,7 +49,7 @@ public class CarroResource implements Serializable{
 	public String findAll(Model model) {
 			List <Carro> list = service.findAll();
 			List<CarroDTO> listDto = list.stream().map(obj -> new CarroDTO(obj)).collect(Collectors.toList());
-		model.addAttribute("lista", listDto);
+		model.addAttribute("modelLista", listDto);
 		return "carro";
 	}
 	
@@ -67,12 +69,23 @@ public class CarroResource implements Serializable{
 	}
 	
 	
-	@RequestMapping(value="/update/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody CarroDTO objDto, @PathVariable Integer id){
+	@RequestMapping(value="/update/{id}", method=RequestMethod.POST)
+	public String update( @Valid CarroDTO objDto, @PathVariable Integer id){
 		Carro obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
-		return ResponseEntity.noContent().build();
+		return "redirect:/carros/lista";
+	}
+	
+	@RequestMapping(value="/cadastrarCarro")
+	public String cadastrarCarro(Model model) {
+		return "cadastrarCarro";
+	}
+	
+	@RequestMapping(value="/atualiza/{id}")
+	public String atualizar(@PathVariable("id") int id, Model model) {
+		model.addAttribute("modelCarro", service.find(id));		
+		return "cadastrarCarro";
 	}
 
 	

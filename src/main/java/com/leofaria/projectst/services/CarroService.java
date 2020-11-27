@@ -44,7 +44,8 @@ public class CarroService {
 	}
 	
 	private void updateData(Carro newObj,Carro obj) {
-		newObj.setNome(obj.getNome());	
+		newObj.setNome(obj.getNome());
+		newObj.setMarca(obj.getMarca());
 	}
 
 	public Carro fromDTO(CarroDTO objDto) {
