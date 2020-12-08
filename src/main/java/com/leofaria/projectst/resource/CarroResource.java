@@ -60,16 +60,16 @@ public class CarroResource implements Serializable{
 	}
 	
 	@RequestMapping(value="/novo" ,method= RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody CarroDTO objDto){
+	public String insert(@Valid CarroDTO objDto, @RequestParam("nome") String nome,@RequestParam("marca") String marca){
 		Carro obj = service.fromDTO(objDto);
+		obj.setNome(nome);
+		obj.setMarca(marca);
 		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return "redirect:/carros/lista";
 	}
 	
 	
-	@RequestMapping(value="/update/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
 	public String update( @Valid CarroDTO objDto, @PathVariable Integer id){
 		Carro obj = service.fromDTO(objDto);
 		obj.setId(id);
@@ -78,14 +78,15 @@ public class CarroResource implements Serializable{
 	}
 	
 	@RequestMapping(value="/cadastrarCarro")
-	public String cadastrarCarro(Model model) {
-		return "cadastrarCarro";
+	public String cadastrar() {
+		return "addCarro";
 	}
+	
 	
 	@RequestMapping(value="/atualiza/{id}")
 	public String atualizar(@PathVariable("id") int id, Model model) {
 		model.addAttribute("modelCarro", service.find(id));		
-		return "cadastrarCarro";
+		return "updateCarro";
 	}
 
 	
