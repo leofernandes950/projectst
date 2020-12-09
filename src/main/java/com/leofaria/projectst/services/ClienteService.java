@@ -44,7 +44,6 @@ public class ClienteService {
 	private void updateData(Cliente newObj,Cliente obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setCpfOuCnpj(obj.getCpfOuCnpj());
-		newObj.setDataCadastro(obj.getDataCadastro());
 		newObj.setDataNascimento(obj.getDataNascimento());
 		newObj.setEmail(obj.getEmail());
 		newObj.setEndereco(obj.getEmail());

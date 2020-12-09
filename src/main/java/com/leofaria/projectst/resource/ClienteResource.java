@@ -1,6 +1,7 @@
 package com.leofaria.projectst.resource;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,10 +55,13 @@ public class ClienteResource implements Serializable{
 	}
 	
 	@RequestMapping(value="/novo" ,method= RequestMethod.POST)
-	public String insert(@Valid ClienteDTO objDto, @RequestParam("nome") String nome,@RequestParam("marca") String marca,
-			@RequestParam("quantidade") int quantidade,@RequestParam("valorVenda") double valorVenda,
-			@RequestParam("valorCompra") double valorCompra) {	
+	public String insert(@Valid ClienteDTO objDto, @RequestParam("nome") String nome,@RequestParam("cpfOuCnpj") String cpfOuCnpj,
+			@RequestParam("endereco") String endereco,@RequestParam("dataNascimento") Date dataNascimento,
+			@RequestParam("sexo") String sexo,@RequestParam("email") String email) {	
+		Date dataAtual = new Date();
 		Cliente obj = service.fromDTO(objDto);
+		obj.setDataCadastro(dataAtual);
+		obj = service.insert(obj);
 		return "redirect:/clientes/lista";
 	}
 	
@@ -78,7 +82,7 @@ public class ClienteResource implements Serializable{
 	
 	@RequestMapping(value="/atualiza/{id}")
 	public String atualizar(@PathVariable("id") int id, Model model) {
-		model.addAttribute("modelCliente", service.find(id));		
+		model.addAttribute("modelCliente", service.find(id));
 		return "updateCliente";
 	}
 

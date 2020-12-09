@@ -36,12 +36,15 @@ public class ProjectstApplication implements CommandLineRunner{
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 			
-			Cliente cli1 = new Cliente(null,"Leonardo De Melo","12068375605","Rua do Morro",sdf.parse("03/08/2020 09:33"),sdf.parse("07/10/2020 10:45"),"Masculino","Jose Da Fonseca",1);
+			Cliente cli1 = new Cliente(null,"Leonardo De Melo","12068375605","Rua do Morro",sdf.parse("03/08/2020 09:33"),sdf.parse("07/10/2020 10:45"),"Masculino","leo@leo.com",1);
 			cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 			clienteRepository.saveAll(Arrays.asList(cli1));
+			Cliente cli2 = new Cliente(null,"Dayane Silveira","15085547205","Rua do Praia",sdf.parse("03/08/2020 09:33"),sdf.parse("07/10/2020 10:45"),"Feminino","dayane@dayane.com",1);
+			cli2.getTelefones().addAll(Arrays.asList("58121653", "15121253"));
+			clienteRepository.saveAll(Arrays.asList(cli2));
 			
 			Venda venda1 = new Venda(null,0.0,36000,sdf.parse("03/10/2020 10:35"),cli1);
-			Venda venda2 = new Venda(null,0.0,40000,sdf.parse("07/08/2020 09:15"));
+			Venda venda2 = new Venda(null,0.0,40000,sdf.parse("07/08/2020 09:15"),cli2);
 			
 			cli1.getVenda().addAll(Arrays.asList(venda1));
 			

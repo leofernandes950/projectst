@@ -38,26 +38,29 @@
 	
 	<div class="container">
 		<div class="header clearfix">
-			<h3 class="text-muted">Cadastro de Produtos</h3>
+			<h3 class="text-muted">Cadastro de Clientes</h3>
 		</div>
 
 		<div class="jumbotron">
 			
-			<form th:action="@{../../produtos/novo}"   method="post"  class="form-group" >
+			<form th:action="@{../../clientes/novo}"   method="post"  class="form-group" >
 				<div>
 					<label>Nome: </label> <input name="nome" placeholder="Digite o nome"></input>
 				</div>
 				<div>
-					<label>Marca: </label> <input name="marca" placeholder="Digite a marca"></input>
+					<label>CPF Ou CNPJ: </label> <input name="cpfOuCnpj" placeholder="Digite o CPF ou CNPJ"></input>
 				</div>
 				<div>
-					<label>Quantidade: </label> <input name="quantidade" placeholder="Digite a Quantidade disponível"></input>
+					<label>Endereço: </label> <input name="endereco" placeholder="Digite o endereço"></input>
 				</div>
 				<div>
-					<label>Valor De Venda: </label> <input name="valorVenda" placeholder="Digite o valor"></input>
+					<label>Data de Nascimento: </label> <input name="dataNascimento" placeholder="Digite a data de nascimento"></input>
 				</div>
 				<div>
-					<label>Valor de Custo: </label> <input name="valorCompra" placeholder="Digite o valor"></input>
+					<label>Sexo: </label> <input name="sexo" placeholder="Digite o sexo"></input>
+				</div>
+				<div>
+					<label>Email </label> <input name="email" placeholder="Digite o email"></input>
 				</div>
 				<input type="submit" value="Cadastrar"/>
 			</form>

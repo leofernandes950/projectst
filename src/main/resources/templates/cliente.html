@@ -13,8 +13,8 @@
 	<div class="container-fluid">
 		<div class="content-wrapper">
 			<section class="content-header">
-				<h3 class="text-muted">Produtos disponíveis</h3>
-				<a class="btn btn-success" href="../../produtos/cadastrarProduto">Novo </a>
+				<h3 class="text-muted">Clientes Cadastrados</h3>
+				<a class="btn btn-success" href="../../clientes/cadastrarCliente">Novo </a>
 			</section>
 			
 			<br>
@@ -35,14 +35,14 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="produto : ${modelLista}">
+										<tr th:each="cliente : ${modelLista}">
 											<td><a class="btn btn-primary"
-												th:href="@{../produtos/atualiza/__${produto.id}__}">Update</a> <a
+												th:href="@{../clientes/atualiza/__${cliente.id}__}">Update</a> <a
 												class="btn btn-danger"
-												th:href="@{../produtos/delete/__${produto.id}__}">Delete</a></td>
-											<td th:text="${produto.nome}">Nomes</td>
-											<td th:text="${produto.marca}">Email</td>
-											<td th:text="${produto.quantidade}">Data De Cadastro</td>
+												th:href="@{../clientes/delete/__${cliente.id}__}">Delete</a></td>
+											<td th:text="${cliente.nome}">Nomes</td>
+											<td th:text="${cliente.email}">Email</td>
+											<td th:text="${cliente.dataCadastro}">Data De Cadastro</td>
 										</tr>
 									</tbody>
 								</table>
