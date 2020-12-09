@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -23,6 +25,10 @@ public class Venda {
 	@JsonFormat(pattern="dd/MM/yyyy hh:mm")
 	private Date data;
 	
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
+	private Cliente cliente;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="venda")
 	private List<Produto> produtos = new ArrayList<>();
@@ -37,6 +43,14 @@ public class Venda {
 		this.desconto = desconto;
 		this.total = total;
 		this.data = data;
+	}
+	public Venda(Integer id, double desconto , double total, Date data,Cliente cliente) {
+		super();
+		this.id = id;
+		this.desconto = desconto;
+		this.total = total;
+		this.data = data;
+		this.cliente = cliente;
 	}
 	
 	
