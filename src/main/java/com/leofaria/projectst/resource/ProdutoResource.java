@@ -57,13 +57,7 @@ public class ProdutoResource implements Serializable{
 	public String insert(@Valid ProdutoDTO objDto, @RequestParam("nome") String nome,@RequestParam("marca") String marca,
 			@RequestParam("quantidade") int quantidade,@RequestParam("valorVenda") double valorVenda,
 			@RequestParam("valorCompra") double valorCompra) {
-		
 		Produto obj = service.fromDTO(objDto);
-		obj.setNome(nome);
-		obj.setMarca(marca);
-		obj.setQuantidade(quantidade);
-		obj.setValorVenda(valorVenda);
-		obj.setValorCompra(valorCompra);
 		obj = service.insert(obj);
 		return "redirect:/produtos/lista";
 	}

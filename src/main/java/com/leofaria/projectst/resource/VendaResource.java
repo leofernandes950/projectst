@@ -60,13 +60,8 @@ public class VendaResource implements Serializable{
 	/*@RequestMapping(value="/novo" ,method= RequestMethod.POST)
 	public String insert(@Valid CarroDTO objDto, @RequestParam("desconto") double desconto,@RequestParam("Total") String marca,
 			@RequestParam("quantidade") int quantidade,@RequestParam("valorVenda") double valorVenda,
-			@RequestParam("valorCompra") double valorCompra) {
-		
+			@RequestParam("valorCompra") double valorCompra) {	
 		Venda obj = service.fromDTO(objDto);
-		obj.setDesconto(desconto);
-		obj.setTotal(marca);
-		obj.setData(quantidade);
-		obj = service.insert(obj);
 		return "redirect:/vendas/lista";
 	}*/
 	

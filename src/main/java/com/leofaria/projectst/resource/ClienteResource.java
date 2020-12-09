@@ -53,20 +53,13 @@ public class ClienteResource implements Serializable{
 		return "redirect:/clientes/lista";
 	}
 	
-	/*@RequestMapping(value="/novo" ,method= RequestMethod.POST)
+	@RequestMapping(value="/novo" ,method= RequestMethod.POST)
 	public String insert(@Valid ClienteDTO objDto, @RequestParam("nome") String nome,@RequestParam("marca") String marca,
 			@RequestParam("quantidade") int quantidade,@RequestParam("valorVenda") double valorVenda,
-			@RequestParam("valorCompra") double valorCompra) {
-		
+			@RequestParam("valorCompra") double valorCompra) {	
 		Cliente obj = service.fromDTO(objDto);
-		obj.setNome(nome);
-		obj.setMarca(marca);
-		obj.setQuantidade(quantidade);
-		obj.setValorVenda(valorVenda);
-		obj.setValorCompra(valorCompra);
-		obj = service.insert(obj);
 		return "redirect:/clientes/lista";
-	}*/
+	}
 	
 	
 	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
