@@ -43,14 +43,22 @@
 
 		<div class="jumbotron">
 			
-			<form th:action="@{../../carros/novo}"   method="post"  class="form-group" >
+			<form th:action="@{../../produtos/novo}"   method="post"  class="form-group" >
 				<div>
-					<label>Nome: </label> <input name="nome" placeholder="Digite o nome do carro"></input>
+					<label>Nome: </label> <input name="nome" placeholder="Digite o nome"></input>
 				</div>
 				<div>
-					<label>Marca: </label> <input name="marca" placeholder="Digite a marca do carro"></input>
+					<label>Marca: </label> <input name="marca" placeholder="Digite a marca"></input>
 				</div>
-				
+				<div>
+					<label>Quantidade: </label> <input name="quantidade" placeholder="Digite a Quantidade disponível"></input>
+				</div>
+				<div>
+					<label>Valor De Venda: </label> <input name="valorVenda" placeholder="Digite o valor"></input>
+				</div>
+				<div>
+					<label>Valor de Custo: </label> <input name="valorCompra" placeholder="Digite o valor"></input>
+				</div>
 				<input type="submit" value="Cadastrar"/>
 			</form>
 
@@ -67,6 +75,10 @@
 
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="/docs/3.3/../assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="/docs/3.3/../assets/js/ie10-viewport-bug-workaround.js">
+	
+	
+	
+	</script>
 </body>
 </html>

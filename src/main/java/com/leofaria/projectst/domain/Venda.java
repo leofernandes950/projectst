@@ -25,7 +25,7 @@ public class Venda {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="venda")
-	private List<Carro> carros = new ArrayList<>();
+	private List<Produto> produtos = new ArrayList<>();
 	
 	public Venda() {
 		// TODO Auto-generated constructor stub
@@ -83,19 +83,19 @@ public class Venda {
 		this.total = total;
 	}
 
-	public List<Carro> getCarros() {
-		return carros;
+	public List<Produto> getProdutos() {
+		return produtos;
 	}
 
-	public void setCarros(List<Carro> carros) {
-		this.carros = carros;
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((carros == null) ? 0 : carros.hashCode());
+		result = prime * result + ((produtos == null) ? 0 : produtos.hashCode());
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(desconto);
@@ -114,10 +114,10 @@ public class Venda {
 		if (getClass() != obj.getClass())
 			return false;
 		Venda other = (Venda) obj;
-		if (carros == null) {
-			if (other.carros != null)
+		if (produtos == null) {
+			if (other.produtos != null)
 				return false;
-		} else if (!carros.equals(other.carros))
+		} else if (!produtos.equals(other.produtos))
 			return false;
 		if (data == null) {
 			if (other.data != null)
@@ -143,7 +143,7 @@ public class Venda {
 		builder.append(", data=");
 		builder.append(data);
 		builder.append(", carros=");
-		builder.append(carros);
+		builder.append(produtos);
 		builder.append("]");
 		return builder.toString();
 	}

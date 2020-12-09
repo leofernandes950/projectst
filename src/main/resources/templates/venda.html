@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<body>
+
+	<div th:insert="~{navbar::navbar}"></div>
+	<div class="container-fluid">
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h3 class="text-muted">Útimas Vendas Realizadas</h3>
+				<a class="btn btn-success" href="../../vendas/cadastrarVenda">Nova Venda </a>
+			</section>
+			
+			<br>
+			<div class="box box-info">
+				<div class="box-body">
+					<section class="content">
+						<div>
+							<div >
+								<table class="table table-bordered">
+									<thead>
+										<tr>									
+											<th scope="col">Ação</th>
+											<th scope="col">Valor Total</th>
+											<th scope="col">Data de Venda</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="venda : ${modelLista}">
+											<td><a class="btn btn-primary"
+												th:href="@{../vendas/atualiza/__${venda.id}__}">Editar Venda</a> <a
+												class="btn btn-danger"
+												th:href="@{../vendas/delete/__${venda.id}__}">Cancelar Venda</a></td>
+											
+											<td th:text="${venda.total}">Valor Total</td>
+											<td th:text="${venda.data}">Data de Venda</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="card">
+  <div class="card-header">
+    Destaque
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Título especial</h5>
+    <p class="card-text">Com suporte a texto embaixo, que funciona como uma introdução a um conteúdo adicional.</p>
+    <a href="#" class="btn btn-primary">Visitar</a>
+  </div>
+</div>
+							</div>
+						</div>
+
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

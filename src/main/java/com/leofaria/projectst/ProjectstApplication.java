@@ -8,16 +8,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.leofaria.projectst.domain.Carro;
+import com.leofaria.projectst.domain.Produto;
 import com.leofaria.projectst.domain.Venda;
-import com.leofaria.projectst.repositories.CarroRepository;
+import com.leofaria.projectst.repositories.ProdutoRepository;
 import com.leofaria.projectst.repositories.VendaRepository;
 
 @SpringBootApplication
 public class ProjectstApplication implements CommandLineRunner{
 	
 	@Autowired
-	private CarroRepository carroRepository;
+	private ProdutoRepository carroRepository;
 	
 	@Autowired
 	private VendaRepository vendaRepository;
@@ -34,15 +34,15 @@ public class ProjectstApplication implements CommandLineRunner{
 			Venda venda1 = new Venda(null,0.0,36000,sdf.parse("03/10/2020 10:35"));
 			Venda venda2 = new Venda(null,0.0,40000,sdf.parse("07/08/2020 09:15"));
 			
-			Carro carro1 = new Carro(null,"Strada","Fiat",venda1);
-			Carro carro2 = new Carro(null,"Palio","Fiat",venda2);
+			Produto produto1 = new Produto(null,"Strada","Fiat",5,50.000,33.000,venda1);
+			Produto produto2 = new Produto(null,"Palio","Fiat",7,60.000,44.000,venda2);
 			
-			venda1.getCarros().addAll(Arrays.asList(carro1));
-			venda2.getCarros().addAll(Arrays.asList(carro2));
+			venda1.getProdutos().addAll(Arrays.asList(produto1));
+			venda2.getProdutos().addAll(Arrays.asList(produto2));
 			
 			
 			vendaRepository.saveAll(Arrays.asList(venda1,venda2));
-			carroRepository.saveAll(Arrays.asList(carro1,carro2));
+			carroRepository.saveAll(Arrays.asList(produto1,produto2));
 			}
 		
 		

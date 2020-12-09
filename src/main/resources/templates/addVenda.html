@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+<title>Narrow Jumbotron Template for Bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/docs/3.3/../dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="/docs/3.3/../assets/css/ie10-viewport-bug-workaround.css"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="jumbotron-narrow.css" rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="/docs/3.3/../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="/docs/3.3/../assets/js/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<div th:insert="~{navbar::navbar}"></div>
+
+	<div class="container-fluid">
+		<div class="header clearfix">
+			<h3 class="text-muted">Realizar Nova Venda</h3>
+		</div>
+
+		<div class="jumbotron">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm">
+					<div class="form-group col-md-10">
+						<label>Cliente: </label> <select class="form-control">
+							<option th:value="'M'" th:text="Male"></option>
+							<option th:value="'F'" th:text="Female"></option>
+						</select>
+					</div>
+					</div>
+					<div class="col-sm">
+					<div class="form-group col-md-10">
+						<label>Produtos: </label> <select id="produto" name="produto" thfield="*{produto.id}" class="form-control">
+							<option th:each="produto : ${modelProduto}" th:value="${produto.id}" th:text="${produto.nome}"></option>
+						</select>
+					</div>
+					</div>
+					<div class="col-sm">
+						<div class="form-group col-md-10">
+							<label for="" >Quantidade: </label> <input class="form-control" name="quantidade"
+								placeholder="Digite a Quantidade"></input>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+		</div>
+
+
+
+	</div>
+	<!-- /container -->
+
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/docs/3.3/../assets/js/ie10-viewport-bug-workaround.js">
+		
+	</script>
+</body>
+</html>

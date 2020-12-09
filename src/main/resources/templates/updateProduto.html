@@ -45,12 +45,21 @@
 
 		<div class="jumbotron">
 			
-			<form th:action="@{../../carros/update/__${modelCarro.id}__}"   method="get"  class="form-group" >
+			<form th:action="@{../../produtos/update/__${modelProduto.id}__}"   method="get"  class="form-group" >
 				<div>
-					<label>Nome: </label> <input th:field="*{modelCarro.nome}"></input>
+					<label>Nome: </label> <input th:field="*{modelProduto.nome}"></input>
 				</div>
 				<div>
-					<label>Marca: </label> <input th:field="*{modelCarro.marca}"></input>
+					<label>Marca: </label> <input th:field="*{modelProduto.marca}"></input>
+				</div>
+				<div>
+					<label>Quantidade: </label> <input th:field="*{modelProduto.quantidade}"></input>
+				</div>
+				<div>
+					<label>Valor de Venda: </label> <input th:field="*{modelProduto.valorVenda}"></input>
+				</div>
+				<div>
+					<label>Valor de Compra: </label> <input th:field="*{modelProduto.valorCompra}"></input>
 				</div>
 				
 				<input type="submit" value="Atualizar"/>

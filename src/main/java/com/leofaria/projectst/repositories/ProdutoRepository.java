@@ -3,10 +3,10 @@ package com.leofaria.projectst.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.leofaria.projectst.domain.Carro;
+import com.leofaria.projectst.domain.Produto;
 
 @Repository
-public interface CarroRepository extends JpaRepository<Carro,Integer>{
+public interface ProdutoRepository extends JpaRepository<Produto,Integer>{
 
 	
 
