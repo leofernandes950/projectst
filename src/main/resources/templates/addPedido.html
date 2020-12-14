@@ -41,38 +41,56 @@
 			<h3 class="text-muted">Realizar Nova Venda</h3>
 		</div>
 
+		<form action="../../pedidos/novo" method="post" class="form-group">
 		<div class="jumbotron">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm">
-					<div class="form-group col-md-10">
-						<label>Cliente: </label> <select class="form-control">
-							<option th:value="'M'" th:text="Male"></option>
-							<option th:value="'F'" th:text="Female"></option>
-						</select>
-					</div>
-					</div>
-					<div class="col-sm">
-					<div class="form-group col-md-10">
-						<label>Produtos: </label> <select id="produto" name="produto" thfield="*{produto.id}" class="form-control">
-							<option th:each="produto : ${modelProduto}" th:value="${produto.id}" th:text="${produto.nome}"></option>
-						</select>
-					</div>
+						<div class="form-group col-md-10">
+							<label>Cliente: </label> <select id="cliente" name="cliente"
+								thfield="*{pedido.cliente.id}" class="form-control">
+								<option th:each="cliente : ${modelCliente}"
+									th:value="${cliente.id}" th:text="${cliente.nome}"></option>
+							</select>
+						</div>
 					</div>
 					<div class="col-sm">
 						<div class="form-group col-md-10">
-							<label for="" >Quantidade: </label> <input class="form-control" name="quantidade"
-								placeholder="Digite a Quantidade"></input>
+							<label>Produtos: </label> <select id="produto" name="produto"
+								thfield="*{pedido.produto.id}" class="form-control"
+								onblur="multiplicaValor()">
+								<option th:each="produto : ${modelProduto}"
+									th:value="${produto.valorCompra}" th:text="${produto.nome}"></option>
+							</select>
 						</div>
+					</div>
+					<div class="col-sm">
+						<div class="form-group col-md-10">
+							<label for="">Quantidade: </label> <input class="form-control"
+								name="quantidade" id="quantidade" onblur="multiplicaValor()"
+								placeholder="Digite a Quantidade"></input>
 						</div>
 					</div>
 				</div>
 			</div>
-
-
-
-
+			<div>
+				<div id="resultTotal" class="fixed">
+					<h2 id="h2" style="color: green;">&nbsp;&nbsp;Total: R$ 0,00</h2>
+				</div>
+				<div id="input" class="fixed">
+					<input type="submit" value="Cadastrar" class="btn btn-success"/>
+				</div>
+			</div>
+			<div>
+				
+			</div>
 		</div>
+		
+	</form>
+
+
+
+	</div>
 
 
 
@@ -81,8 +99,18 @@
 
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="/docs/3.3/../assets/js/ie10-viewport-bug-workaround.js">
-		
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+	<script>
+		function multiplicaValor() {
+			var quantidade = $("#quantidade").val();
+			var produto = $("#produto option:selected").val();
+			var valorTotal = produto * quantidade;
+			$('#resultTotal').html(
+					"<h2 style='color:green;'>&nbsp;&nbsp;TOTAL: R$ "
+							+ valorTotal + "</h2>");
+
+		}
 	</script>
 </body>
 </html>

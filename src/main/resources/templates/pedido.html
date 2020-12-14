@@ -14,7 +14,7 @@
 		<div class="content-wrapper">
 			<section class="content-header">
 				<h3 class="text-muted">Útimas Vendas Realizadas</h3>
-				<a class="btn btn-success" href="../../vendas/cadastrarVenda">Nova Venda </a>
+				<a class="btn btn-success" href="../../pedidos/cadastrarPedido">Nova Venda </a>
 			</section>
 			
 			<br>
@@ -27,19 +27,20 @@
 									<thead>
 										<tr>									
 											<th scope="col">Ação</th>
-											<th scope="col">Valor Total</th>
-											<th scope="col">Data de Venda</th>
+											<th scope="col">Cliente</th>
+											<th scope="col">Pagamento</th>
+											
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="venda : ${modelLista}">
+										<tr th:each="pedido : ${modelLista}">
 											<td><a class="btn btn-primary"
-												th:href="@{../vendas/atualiza/__${venda.id}__}">Editar Venda</a> <a
+												th:href="@{../pedidos/atualiza/__${pedido.id}__}">Editar Venda</a> <a
 												class="btn btn-danger"
-												th:href="@{../vendas/delete/__${venda.id}__}">Cancelar Venda</a></td>
+												th:href="@{../pedidos/delete/__${pedido.id}__}">Cancelar Venda</a></td>
 											
-											<td th:text="${venda.total}">Valor Total</td>
-											<td th:text="${venda.data}">Data de Venda</td>
+											<td th:text="${pedido.cliente.nome}">Cliente</td>
+											<td th:text="${pedido.pagamento.estado}">Pagamento</td>
 										</tr>
 									</tbody>
 								</table>

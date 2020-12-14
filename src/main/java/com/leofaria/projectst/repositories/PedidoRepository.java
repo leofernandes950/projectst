@@ -4,10 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.leofaria.projectst.domain.Produto;
-import com.leofaria.projectst.domain.Venda;
+import com.leofaria.projectst.domain.Pedido;
 
 @Repository
-public interface VendaRepository extends JpaRepository<Venda,Integer>{
+public interface PedidoRepository extends JpaRepository<Pedido,Integer>{
 
 	
 
