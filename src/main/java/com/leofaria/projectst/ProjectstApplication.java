@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.leofaria.projectst.domain.Cliente;
+import com.leofaria.projectst.domain.ItemPedido;
 import com.leofaria.projectst.domain.Pagamento;
 import com.leofaria.projectst.domain.PagamentoComBoleto;
 import com.leofaria.projectst.domain.PagamentoComCartao;
@@ -16,6 +17,7 @@ import com.leofaria.projectst.domain.Pedido;
 import com.leofaria.projectst.domain.Produto;
 import com.leofaria.projectst.domain.enums.EstadoPagamento;
 import com.leofaria.projectst.repositories.ClienteRepository;
+import com.leofaria.projectst.repositories.ItemPedidoRepository;
 import com.leofaria.projectst.repositories.PagamentoRepository;
 import com.leofaria.projectst.repositories.PedidoRepository;
 import com.leofaria.projectst.repositories.ProdutoRepository;
@@ -35,6 +37,9 @@ public class ProjectstApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectstApplication.class, args);
@@ -71,15 +76,24 @@ public class ProjectstApplication implements CommandLineRunner{
 			
 			Produto produto1 = new Produto(null,"Strada","Fiat",5,50.000,33.000);
 			Produto produto2 = new Produto(null,"Palio","Fiat",7,60.000,44.000);
-			//ped1.getProdutos().addAll(Arrays.asList(produto1));
-			//ped2.getProdutos().addAll(Arrays.asList(produto2));
-			produtoRepository.saveAll(Arrays.asList(produto1,produto2));
+			Produto produto3 = new Produto(null,"PalioWeekend","Fiat",7,60.000,44.000);
+			
+			produtoRepository.saveAll(Arrays.asList(produto1,produto2,produto3));
 			
 			
+			ItemPedido ip1 = new ItemPedido(ped1,produto1,0.00,1,2000);
+			ItemPedido ip2 = new ItemPedido(ped1,produto3,0.00,2,3000);
+			ItemPedido ip3 = new ItemPedido(ped2,produto2,25.00,1,3000);
+			
+			ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+			ped2.getItens().addAll(Arrays.asList(ip3));
+			
+			produto1.getItens().addAll(Arrays.asList(ip1));
+			produto2.getItens().addAll(Arrays.asList(ip3));
+			produto3.getItens().addAll(Arrays.asList(ip2));
 			
 			
-			
-			
+			itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
 			
 			}
 		
