@@ -1,5 +1,6 @@
 package com.leofaria.projectst.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +52,14 @@ public class ProdutoService {
 
 	public Produto fromDTO(ProdutoDTO objDto) {
 		return new Produto(objDto.getId(),objDto.getNome(),objDto.getMarca(),objDto.getQuantidade(),objDto.getValorVenda(),objDto.getValorCompra());
+	}
+
+	public HashMap<Integer, Produto> adicionaItem(int idProduto, HashMap<Integer, Produto> produtoHashMap,
+			Integer key) {
+		Produto produto = new Produto();
+		produto = find(idProduto);
+		produtoHashMap.put(key, produto);
+		return produtoHashMap;
 	}
 	
 	

@@ -42,33 +42,82 @@
 		</div>
 
 		<form action="../../pedidos/novo" method="post" class="form-group">
-		<div class="jumbotron">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm">
-						<div class="form-group col-md-10">
-							<label>Cliente: </label> <select id="cliente" name="cliente"
-								thfield="*{pedido.cliente.id}" class="form-control">
-								<option th:each="cliente : ${modelCliente}"
-									th:value="${cliente.id}" th:text="${cliente.nome}"></option>
-							</select>
+			<div class="jumbotron">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm">
+							<div class="form-group col-md-8">
+								<label>Cliente: </label> <select id="cliente" name="cliente"
+									thfield="*{pedido.cliente.id}" class="form-control">
+									<option th:each="cliente : ${modelCliente}"
+										th:value="${cliente.id}" th:text="${cliente.nome}"></option>
+								</select>
+							</div>
 						</div>
-					</div>
-					<div class="col-sm">
-						<div class="form-group col-md-10">
-							<label>Produtos: </label> <select id="produto" name="produto"
-								thfield="*{pedido.produto.id}" class="form-control"
-								onblur="multiplicaValor()">
-								<option th:each="produto : ${modelProduto}"
-									th:value="${produto.valorCompra}" th:text="${produto.nome}"></option>
-							</select>
+						<div class="col-sm">
+							<div class="form-group col-md-8">
+								<label>Forma de Pagamento: </label> <select id="pagamento"
+									name="pagamento" class="form-control">
+									<option th:value="pagamentoBoleto">Pagamento em
+										Dinheiro</option>
+									<option th:value="pagamentoCartao">Pagamento no Cartão</option>
+								</select>
+							</div>
 						</div>
+
 					</div>
-					<div class="col-sm">
-						<div class="form-group col-md-10">
-							<label for="">Quantidade: </label> <input class="form-control"
-								name="quantidade" id="quantidade" onblur="multiplicaValor()"
-								placeholder="Digite a Quantidade"></input>
+				</div>
+
+			</div>
+			<div class="jumbotron">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm">
+							<div class="form-group col-md-10">
+								<h3>
+									Produtos:
+									<h3>
+							</div>
+						</div>
+						<div class="col-sm">
+							<div class="form-group col-md-10">
+								<table class="table table-striped" id="tabelaAdicionaProduto">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">Nome</th>
+											<th scope="col">Marca</th>
+											<th scope="col">Valor</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">#</th>
+											<td>produto.nome</td>
+											<td>produto.marca</td>
+											<td>produto.valorVenda</td>
+										</tr>
+										<tr>
+											<th scope="row">2</th>
+											<td>Jacob</td>
+											<td>Thornton</td>
+											<td>@fat</td>
+										</tr>
+										<tr>
+											<th scope="row">3</th>
+											<td>Larry</td>
+											<td>the Bird</td>
+											<td>@twitter</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-sm">
+							<div class="form-group col-md-10">
+								<button type="button" class="btn btn-primary"
+									data-toggle="modal" data-target="#adicionaProduto">Adicionar</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -78,39 +127,103 @@
 					<h2 id="h2" style="color: green;">&nbsp;&nbsp;Total: R$ 0,00</h2>
 				</div>
 				<div id="input" class="fixed">
-					<input type="submit" value="Cadastrar" class="btn btn-success"/>
+					<input type="submit" value="Cadastrar" class="btn btn-success" />
 				</div>
 			</div>
-			<div>
-				
-			</div>
-		</div>
-		
-	</form>
-
-
-
 	</div>
 
-
-
-	</div>
 	<!-- /container -->
 
 
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script type="text/javascript" src="/js/jquery.min.js"></script>
-	<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-	<script>
-		function multiplicaValor() {
-			var quantidade = $("#quantidade").val();
-			var produto = $("#produto option:selected").val();
-			var valorTotal = produto * quantidade;
-			$('#resultTotal').html(
-					"<h2 style='color:green;'>&nbsp;&nbsp;TOTAL: R$ "
-							+ valorTotal + "</h2>");
 
-		}
-	</script>
+	<!-- Modal -->
+	<div class="modal fade" id="adicionaProduto">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<label>Adicionar Produtos: </label>
+				</div>
+				<div class="modal-body">
+				<form id="adicionaItem" method="post" action="#" onKeyDown="if (event.keyCode == '13') {
+                            return false;
+                        }">
+				<input type="hidden" id="key" value="${key}"/>
+					<div class="form-group col-md-10">
+						<label>Produtos: </label><select id="idProduto" name="idProduto" class="form-control" >
+							<option th:each="produto : ${modelProduto}"
+								th:value="${produto.valorCompra}" th:text="${produto.nome}" th:attr="produto_id=${produto.getId()}"></option>
+						</select>
+					</div>
+					<div class="form-group col-md-10">
+						<label for="">Quantidade: </label> <input class="form-control"
+							name="quantidade" id="quantidade"
+							placeholder="Digite a Quantidade" type="number"></input>
+					</div>
+					<button type="submit" style="display: none;"></button>
+					</form>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Fechar</button>
+						<button type="button" class="btn btn-primary"
+							onclick="multiplicaValor();">Adicionar Produto</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+		<script type="text/javascript" src="/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+		<script>
+			function multiplicaValor() {
+				var quantidade = $("#quantidade").val();
+				var valorProduto = $("#idProduto option:selected").val();
+				var valorTotal = valorProduto * quantidade;
+				$('#resultTotal').html(
+						"<h2 style='color:green;'>&nbsp;&nbsp;TOTAL: R$ "
+								+ valorTotal + "</h2>");
+				var $myForm = $("adicionaItem")
+				//if (myForm[0].checkValidaty()){
+					$('#adicionaProduto').modal('toggle');
+					adicionaItem();
+				//}else{
+				//	$myForm.find(':submit').click();
+			//	}
+				
+			}
+			
+			function adicionaItem(){
+				var idProduto = $('#idProduto option:selected').attr('produto_id');
+				var key = 0; //parseInt($('#key').val());
+				alert(key)
+				$.ajax({
+					url: "/pedidos/adicionaItem",
+					type: "POST",
+					data: {
+						idProduto : idProduto,
+						key : key
+					},
+					success: function(data){
+						$('#tabelaAdicionaProduto').DataTable().destroy();
+		                $('#tabelaAdicionaProduto').find('tbody').append(data);
+		                $('#tabelaAdicionaProduto').DataTable({
+		                    paging: false,
+		                    bFilter: false,
+		                    responsive: true
+		                }).draw();						
+						alert("success")
+						$('#key').val(key + 1);
+					},
+					error : function(){
+						alert("Erro ao adicionar produto");
+					}
+				})
+				
+			}
+		</script>
 </body>
+
 </html>

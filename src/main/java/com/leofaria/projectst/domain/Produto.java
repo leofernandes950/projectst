@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Produto implements Serializable{
 
@@ -32,10 +34,8 @@ public class Produto implements Serializable{
 	private double valorCompra;
 	
 
-	@ManyToOne
-	@JoinColumn(name="venda_id")
-	private Venda venda;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
 	
@@ -50,20 +50,10 @@ public class Produto implements Serializable{
 		this.valorCompra = valorCompra;
 	}
 	
-	//ao construir relacionamento venda 1 para carros * é necessário criar um novo connstrutor
-	public Produto(Integer id, String nome, String marca,int quantidade,double valorVenda,double valorCompra,Venda venda) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.marca = marca;
-		this.quantidade= quantidade;
-		this.valorVenda= valorVenda;
-		this.valorCompra = valorCompra;
-		this.venda = venda;
-	}
-	
+
 	public Produto() {}
 	
+	 @JsonIgnore
 	 public List<Pedido> getPedidos(){
 		 List<Pedido> lista = new ArrayList<>();
 		 for (ItemPedido x : itens) {
@@ -100,13 +90,6 @@ public class Produto implements Serializable{
 		this.marca = marca;
 	}
 	
-	public Venda getVenda() {
-		return venda;
-	}
-
-	public void setVenda(Venda venda) {
-		this.venda = venda;
-	}
 	
 	public int getQuantidade() {
 		return quantidade;

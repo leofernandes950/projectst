@@ -38,8 +38,6 @@ public class Cliente implements Serializable{
 	private Integer tipo;
 	
 	
-	@OneToMany(mappedBy="cliente")
-	private List<Venda> venda = new ArrayList();
 	
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedido = new ArrayList();
@@ -108,12 +106,6 @@ public class Cliente implements Serializable{
 		this.tipo = tipo;
 	}
 	
-	public List<Venda> getVenda() {
-		return venda;
-	}
-	public void setVenda(List<Venda> venda) {
-		this.venda = venda;
-	}
 	
 	public List<Pedido> getPedido() {
 		return pedido;
