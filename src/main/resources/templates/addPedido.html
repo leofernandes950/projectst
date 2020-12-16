@@ -169,7 +169,6 @@
 				$('#adicionaProduto').modal('toggle');
 				adicionaItem();
 
-
 			}
 
 			function adicionaItem() {
@@ -187,7 +186,7 @@
 					},
 					success : function(data) {
 						$('#tabelaAdicionaProduto').find('tbody').append(data);
-						$('#key').val(key + 1);
+						$('#key').val(key + 1);						
 					},
 					error : function() {
 						alert("Erro ao adicionar produto");

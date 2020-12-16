@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.leofaria.projectst.domain.Cliente;
 import com.leofaria.projectst.domain.Pagamento;
@@ -64,8 +65,13 @@ public class PedidoResource implements Serializable{
 	}
 	
 	@RequestMapping(value = "/delete/{id}")
-	public String delete(@PathVariable Integer id){
+	public String delete(@PathVariable Integer id,RedirectAttributes redirectAttributes){
+		try {
 		servicePedido.delete(id);
+		return "redirect:/pedidos/lista";
+		}catch (Exception e){
+			redirectAttributes.addFlashAttribute("msgAviso", "Essa venda não pode ser deletada");
+		}
 		return "redirect:/pedidos/lista";
 	}
 	
