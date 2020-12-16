@@ -55,14 +55,6 @@
 							</div>
 						</div>
 						<div class="col-sm">
-							<div class="form-group col-md-8">
-								<label>Forma de Pagamento: </label> <select id="pagamento"
-									name="pagamento" class="form-control">
-									<option th:value="pagamentoBoleto">Pagamento em
-										Dinheiro</option>
-									<option th:value="pagamentoCartao">Pagamento no Cartão</option>
-								</select>
-							</div>
 						</div>
 
 					</div>
@@ -129,10 +121,7 @@
 					<label>Adicionar Produtos: </label>
 				</div>
 				<div class="modal-body">
-					<form id="adicionaItem" method="post" action="#"
-						onKeyDown="if (event.keyCode == '13') {
-                            return false;
-                        }">
+					<form id="adicionaItem" method="post" action="#">
 						<input type="hidden" id="key" th:value="${key}" />
 						<div class="form-group col-md-10">
 							<label>Produtos: </label><select id="idProduto" name="idProduto"

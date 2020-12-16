@@ -1,14 +1,19 @@
 package com.leofaria.projectst.services;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.leofaria.projectst.domain.ItemPedido;
+import com.leofaria.projectst.domain.Pagamento;
 import com.leofaria.projectst.domain.Pedido;
+import com.leofaria.projectst.domain.Produto;
 import com.leofaria.projectst.domain.enums.EstadoPagamento;
 import com.leofaria.projectst.repositories.ItemPedidoRepository;
 import com.leofaria.projectst.repositories.PagamentoRepository;
@@ -37,21 +42,28 @@ public class PedidoService {
 		return obj.orElse(null);
 	}
 	
-	public Pedido insert(Pedido obj) {
+	public Pedido insert(Pedido obj,HashMap<Integer,Produto> produtoHashMap) {
 		obj.setId(null);
 		obj.setInstante(new Date());
 		obj.setCliente(clienteService.find(obj.getCliente().getId()));
-		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
-		obj.getPagamento().setPedido(obj);
+		Pagamento pagamento = new Pagamento(null,EstadoPagamento.QUITADO,obj);
+		obj.setPagamento(pagamento);
+		System.out.println(obj.getItens());
+			//obj.getPagamento().setPedido(obj);
 		obj = repo.save(obj);
 		pagamentoRepository.save(obj.getPagamento());
-		for (ItemPedido ip : obj.getItens()) {
-			ip.setDesconto(0.0);
-			ip.setProduto(produtoService.find(ip.getProduto().getId()));
-			ip.setPreco(ip.getProduto().getValorVenda());
-			ip.setPedido(obj);
+		for(int i=0;i<produtoHashMap.size();i++) {
+		
+			ItemPedido item = new ItemPedido();
+	
+			item.setDesconto(0.0);
+			item.setProduto(produtoHashMap.get(i));
+			item.setPreco(item.getProduto().getValorVenda());
+			item.setPedido(obj);
+			itemPedidoRepository.save(item);
 		}
-		itemPedidoRepository.saveAll(obj.getItens());
+
+		
 		return obj;
 	}
 	

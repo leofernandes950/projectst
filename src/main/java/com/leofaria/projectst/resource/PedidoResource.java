@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.leofaria.projectst.domain.Cliente;
+import com.leofaria.projectst.domain.Pagamento;
+import com.leofaria.projectst.domain.PagamentoComBoleto;
+import com.leofaria.projectst.domain.PagamentoComCartao;
 import com.leofaria.projectst.domain.Pedido;
 import com.leofaria.projectst.domain.Produto;
 import com.leofaria.projectst.dto.ClienteDTO;
@@ -68,7 +71,7 @@ public class PedidoResource implements Serializable{
 	
 	@RequestMapping(value="/novo" ,method= RequestMethod.POST)
 	public String insert(@Valid Pedido obj) {	
-		servicePedido.insert(obj);
+		servicePedido.insert(obj,produtoHashMap);
 		return "redirect:/pedidos/lista";
 	}
 	
@@ -87,9 +90,13 @@ public class PedidoResource implements Serializable{
 		List<ProdutoDTO> listProdutoDto = listProduto.stream().map(obj -> new ProdutoDTO(obj)).collect(Collectors.toList());
 		List<Cliente> listCliente = serviceCliente.findAll();
 		List<ClienteDTO> listClienteDto = listCliente.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
+		Pagamento pagamentoComBoleto = new PagamentoComBoleto();
+		Pagamento pagamentoComCartao = new PagamentoComCartao();
 		model.addAttribute("modelProduto", listProdutoDto);
 		model.addAttribute("modelCliente", listCliente);
 		model.addAttribute("key", 0);
+		model.addAttribute("pagamentoComBoleto", pagamentoComBoleto);
+		model.addAttribute("pagamentoComCartao", pagamentoComCartao);
 		return "addPedido";
 	}
 	
