@@ -89,6 +89,7 @@ public class PedidoResource implements Serializable{
 		List<ClienteDTO> listClienteDto = listCliente.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
 		model.addAttribute("modelProduto", listProdutoDto);
 		model.addAttribute("modelCliente", listCliente);
+		model.addAttribute("key", 0);
 		return "addPedido";
 	}
 	
@@ -101,14 +102,15 @@ public class PedidoResource implements Serializable{
 	}
 
 	@RequestMapping(value="/adicionaItem")
-	public String adicionaItem(@RequestParam("idProduto") int idProduto,@RequestParam("key") Integer key) {
+	public @ResponseBody String adicionaItem(@RequestParam("idProduto") int idProduto,@RequestParam("key") Integer key,@RequestParam("quantidade") Integer quantidade) {
 		this.produtoHashMap = produtoService.adicionaItem(idProduto,this.produtoHashMap,key);
 		String retorno ="";
 		retorno = "<tr>\r\n" + 
 				"											<th scope=\"row\">"+key+"</th>\r\n" + 
 				"											<td>"+this.produtoHashMap.get(key).getNome()+"</td>\r\n" + 
 				"											<td>"+this.produtoHashMap.get(key).getMarca()+"</td>\r\n" + 
-				"											<td>"+this.produtoHashMap.get(key).getValorVenda()+"</td>\r\n" + 
+				"											<td>"+this.produtoHashMap.get(key).getValorVenda()+"</td>\r\n" +
+				"											<td>"+quantidade+"</td>\r\n" +
 				"										</tr>";
 		
 		return retorno;

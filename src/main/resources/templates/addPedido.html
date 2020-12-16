@@ -88,27 +88,11 @@
 											<th scope="col">Nome</th>
 											<th scope="col">Marca</th>
 											<th scope="col">Valor</th>
+											<th scope="col">Quantidade</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<th scope="row">#</th>
-											<td>produto.nome</td>
-											<td>produto.marca</td>
-											<td>produto.valorVenda</td>
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-										</tr>
-										<tr>
-											<th scope="row">3</th>
-											<td>Larry</td>
-											<td>the Bird</td>
-											<td>@twitter</td>
-										</tr>
+
 									</tbody>
 								</table>
 							</div>
@@ -126,6 +110,7 @@
 				<div id="resultTotal" class="fixed">
 					<h2 id="h2" style="color: green;">&nbsp;&nbsp;Total: R$ 0,00</h2>
 				</div>
+				<input type="hidden" id="somaHidden" name="somaHidden" value="0" />
 				<div id="input" class="fixed">
 					<input type="submit" value="Cadastrar" class="btn btn-success" />
 				</div>
@@ -144,22 +129,25 @@
 					<label>Adicionar Produtos: </label>
 				</div>
 				<div class="modal-body">
-				<form id="adicionaItem" method="post" action="#" onKeyDown="if (event.keyCode == '13') {
+					<form id="adicionaItem" method="post" action="#"
+						onKeyDown="if (event.keyCode == '13') {
                             return false;
                         }">
-				<input type="hidden" id="key" value="${key}"/>
-					<div class="form-group col-md-10">
-						<label>Produtos: </label><select id="idProduto" name="idProduto" class="form-control" >
-							<option th:each="produto : ${modelProduto}"
-								th:value="${produto.valorCompra}" th:text="${produto.nome}" th:attr="produto_id=${produto.getId()}"></option>
-						</select>
-					</div>
-					<div class="form-group col-md-10">
-						<label for="">Quantidade: </label> <input class="form-control"
-							name="quantidade" id="quantidade"
-							placeholder="Digite a Quantidade" type="number"></input>
-					</div>
-					<button type="submit" style="display: none;"></button>
+						<input type="hidden" id="key" th:value="${key}" />
+						<div class="form-group col-md-10">
+							<label>Produtos: </label><select id="idProduto" name="idProduto"
+								class="form-control">
+								<option th:each="produto : ${modelProduto}"
+									th:value="${produto.valorVenda}" th:text="${produto.nome}"
+									th:attr="produto_id=${produto.getId()}"></option>
+							</select>
+						</div>
+						<div class="form-group col-md-10">
+							<label for="">Quantidade: </label> <input class="form-control"
+								name="quantidade" id="quantidade"
+								placeholder="Digite a Quantidade" type="number"></input>
+						</div>
+						<button type="submit" style="display: none;"></button>
 					</form>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
@@ -181,47 +169,42 @@
 			function multiplicaValor() {
 				var quantidade = $("#quantidade").val();
 				var valorProduto = $("#idProduto option:selected").val();
-				var valorTotal = valorProduto * quantidade;
+				var aux = $('#somaHidden').val();
+				var valorTotal= parseFloat(aux) + parseFloat(valorProduto) * parseFloat(quantidade);
+				$('#somaHidden').val("");
+				$('#somaHidden').val(parseFloat(valorTotal));
 				$('#resultTotal').html(
 						"<h2 style='color:green;'>&nbsp;&nbsp;TOTAL: R$ "
 								+ valorTotal + "</h2>");
-				var $myForm = $("adicionaItem")
-				//if (myForm[0].checkValidaty()){
-					$('#adicionaProduto').modal('toggle');
-					adicionaItem();
-				//}else{
-				//	$myForm.find(':submit').click();
-			//	}
-				
+
+				$('#adicionaProduto').modal('toggle');
+				adicionaItem();
+
+
 			}
-			
-			function adicionaItem(){
-				var idProduto = $('#idProduto option:selected').attr('produto_id');
-				var key = 0; //parseInt($('#key').val());
-				alert(key)
+
+			function adicionaItem() {
+				var idProduto = $('#idProduto option:selected').attr(
+						'produto_id');
+				var key = parseInt($('#key').val());
+				var quantidade = $('#quantidade').val();
 				$.ajax({
-					url: "/pedidos/adicionaItem",
-					type: "POST",
-					data: {
+					url : "/pedidos/adicionaItem",
+					type : "POST",
+					data : {
 						idProduto : idProduto,
-						key : key
+						key : key,
+						quantidade : quantidade,
 					},
-					success: function(data){
-						$('#tabelaAdicionaProduto').DataTable().destroy();
-		                $('#tabelaAdicionaProduto').find('tbody').append(data);
-		                $('#tabelaAdicionaProduto').DataTable({
-		                    paging: false,
-		                    bFilter: false,
-		                    responsive: true
-		                }).draw();						
-						alert("success")
+					success : function(data) {
+						$('#tabelaAdicionaProduto').find('tbody').append(data);
 						$('#key').val(key + 1);
 					},
-					error : function(){
+					error : function() {
 						alert("Erro ao adicionar produto");
 					}
 				})
-				
+
 			}
 		</script>
 </body>
