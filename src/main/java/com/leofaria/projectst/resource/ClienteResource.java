@@ -66,7 +66,7 @@ public class ClienteResource implements Serializable{
 	}
 	
 	
-	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/update/{id}", method=RequestMethod.POST)
 	public String update( @Valid ClienteDTO objDto, @PathVariable Integer id){
 		Cliente obj = service.fromDTO(objDto);
 		obj.setId(id);

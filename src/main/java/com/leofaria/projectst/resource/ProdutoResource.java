@@ -63,7 +63,7 @@ public class ProdutoResource implements Serializable{
 	}
 	
 	
-	@RequestMapping(value="/update/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/update/{id}", method=RequestMethod.POST)
 	public String update( @Valid ProdutoDTO objDto, @PathVariable Integer id){
 		Produto obj = service.fromDTO(objDto);
 		obj.setId(id);
