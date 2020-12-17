@@ -58,8 +58,8 @@ public class ProjectstApplication implements CommandLineRunner{
 			clienteRepository.saveAll(Arrays.asList(cli2));
 			
 			
-			Pedido ped1 = new Pedido(null,sdf.parse("30/08/2020 19:30"),cli1);
-			Pedido ped2 = new Pedido(null,sdf.parse("17/05/2019 05:39"),cli2);
+			Pedido ped1 = new Pedido(null,sdf.parse("30/08/2020 19:30"),cli1,1000);
+			Pedido ped2 = new Pedido(null,sdf.parse("17/05/2019 05:39"),cli2,3000);
 			
 			Pagamento pgto1 = new PagamentoComCartao(null,EstadoPagamento.QUITADO,ped1,6);
 			ped1.setPagamento(pgto1);

@@ -47,7 +47,7 @@ public class PedidoResource implements Serializable{
 	private ClienteService serviceCliente;
 	@Autowired
 	private ProdutoService produtoService;
-	
+
 	 private HashMap<Integer, Produto> produtoHashMap;
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
@@ -110,13 +110,16 @@ public class PedidoResource implements Serializable{
 	
 	@RequestMapping(value="/atualiza/{id}")
 	public String atualizar(@PathVariable("id") int id, Model model) {
-		model.addAttribute("modelPedido", servicePedido.find(id));		
+		Pedido pedido = servicePedido.find(id);
+		model.addAttribute("modelPedido", pedido);	
+		model.addAttribute("modelItemPedido", pedido.getItens());
+		System.out.println(pedido);
 		return "updatePedido";
 	}
 
 	@RequestMapping(value="/adicionaItem")
 	public @ResponseBody String adicionaItem(@RequestParam("idProduto") int idProduto,@RequestParam("key") Integer key,@RequestParam("quantidade") Integer quantidade) {
-		this.produtoHashMap = produtoService.adicionaItem(idProduto,this.produtoHashMap,key);
+		this.produtoHashMap = produtoService.adicionaItem(idProduto,this.produtoHashMap,key,quantidade);
 		String retorno ="";
 		retorno = "<tr>\r\n" + 
 				"											<th scope=\"row\">"+key+"</th>\r\n" + 

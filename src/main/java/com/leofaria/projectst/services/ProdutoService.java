@@ -55,10 +55,12 @@ public class ProdutoService {
 	}
 
 	public HashMap<Integer, Produto> adicionaItem(int idProduto, HashMap<Integer, Produto> produtoHashMap,
-			Integer key) {
+			Integer key,int quantidade) {
 		Produto produto = new Produto();
 		produto = find(idProduto);
+		produto.setQuantidade(quantidade);
 		produtoHashMap.put(key, produto);
+		System.out.println(produtoHashMap.get(key).getQuantidade());
 		return produtoHashMap;
 	}
 	

@@ -43,6 +43,7 @@ public class PedidoService {
 	}
 	
 	public Pedido insert(Pedido obj,HashMap<Integer,Produto> produtoHashMap) {
+		
 		obj.setId(null);
 		obj.setInstante(new Date());
 		obj.setCliente(clienteService.find(obj.getCliente().getId()));
@@ -58,6 +59,8 @@ public class PedidoService {
 	
 			item.setDesconto(0.0);
 			item.setProduto(produtoHashMap.get(i));
+			item.setQuantidade(produtoHashMap.get(i).getQuantidade());
+			obj.setValorTotal(obj.getValorTotal()+ produtoHashMap.get(i).getValorVenda() * produtoHashMap.get(i).getQuantidade());
 			item.setPreco(item.getProduto().getValorVenda());
 			item.setPedido(obj);
 			itemPedidoRepository.save(item);

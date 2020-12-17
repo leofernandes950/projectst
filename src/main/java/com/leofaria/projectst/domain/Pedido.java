@@ -27,6 +27,7 @@ public class Pedido implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Date instante;
+	private double valorTotal;
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
@@ -43,17 +44,18 @@ public class Pedido implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pedido(Integer id, Date instante, Cliente cliente) {
+	public Pedido(Integer id, Date instante, Cliente cliente, double valorTotal) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.cliente = cliente;
+		this.valorTotal = valorTotal;
 	}
 	
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
-
+	
 	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
 	}
@@ -89,6 +91,16 @@ public class Pedido implements Serializable{
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	
+
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 
 	@Override
